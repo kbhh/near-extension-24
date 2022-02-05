@@ -1,11 +1,33 @@
 import React, { FC } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
-
+import ContactsCard from "../components/card/ContactsCard";
+import CollectiableItem from "../components/list/CollectiableItem";
+// import { useSelector } from "react-redux";
+// import { RootState } from "../store";
 const Landing: FC = () => {
-  const accountid = useSelector((state: RootState) => state.user.accountid);
+  const imgs = [
+    "https://robohash.org/7058a4120ed1413d0fd14d450fbcae0f?set=set4&bgset=&size=400x400",
+    "https://gravatar.com/avatar/7058a4120ed1413d0fd14d450fbcae0f?s=400&d=robohash&r=x",
+    "https://avatars.dicebear.com/v2/female/7058a4120ed1413d0fd14d450fbcae0f.svg",
+  ];
+  const collectables = [
+    {
+      name: "Digital Ninja",
+      creator: "johndoe.near",
+      img: "https://robohash.org/7058a4120ed1413d0fd14d450fbcae0f?set=set4&bgset=&size=400x400",
+    },
+    {
+      name: "Panda",
+      creator: "whitesnow355",
+      img: "https://gravatar.com/avatar/7058a4120ed1413d0fd14d450fbcae0f?s=400&d=robohash&r=x",
+    },
+    {
+      name: "Digital Ninja",
+      creator: "whitesnow355",
+      img: "https://avatars.dicebear.com/v2/female/7058a4120ed1413d0fd14d450fbcae0f.svg",
+    },
+  ];
   return (
-    <div className="text-center	">
+    <div className="text-center	mx-2">
       <div className="bg-gray-100 py-3">
         <div className="w-2/4 ml-16 text-center  p-1 text-gray-500 bg-white rounded-3xl  dark:bg-gray-800 dark:text-gray-400">
           <div className="flex text-center">
@@ -23,7 +45,7 @@ const Landing: FC = () => {
               type="button"
               className="ml-auto bg-white rounded-full text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
               data-collapse-toggle="toast-message-cta"
-              aria-label="Close"
+              aria-label="arrow"
             >
               <svg
                 className="w-6 h-6"
@@ -41,6 +63,143 @@ const Landing: FC = () => {
               </svg>
             </button>
           </div>
+        </div>
+      </div>
+      <div className="mt-2 flex">
+        <ContactsCard imgs={imgs} />
+        <div
+          id="toast-message-cta"
+          className="w-2/4 ml-2 bg-purple-500 max-w-xs p-4 text-gray-500 rounded-lg shadow dark:bg-gray-800 dark:text-gray-400"
+          role="alert"
+        >
+          <div className="flex mt-1">
+            <div className="text-left text-sm font-normal">
+              <span className="mb-1 text-sm font-semibold text-gray-900 text-white">
+                web3 Apps
+              </span>
+              <div className="mb-2 mt-3 text-sm font-normal flex">
+                <button
+                  type="button"
+                  className="text-white bg-green-400 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-normal rounded-lg text-sm px-1.5 py-2 text-center  mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                >
+                  12 Connected
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className="ml-auto -mx-1.5 -my-1.5  text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+              data-collapse-toggle="toast-message-cta"
+              aria-label="Close"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5l7 7-7 7"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="text-center mt-4">
+        <div
+          id="toast-message-cta"
+          className="w-full bg-red-100 p-4 text-gray-500 rounded-lg shadow dark:bg-gray-800 dark:text-gray-400"
+          role="alert"
+        >
+          <div className="flex mt-1">
+            <div className="text-left text-sm font-normal">
+              <span className="mb-1 w-1/4 text-sm font-semibold text-gray-900 text-black">
+                Start Creating your NFT Today
+              </span>
+              <div className="mb-2 mt-6 text-sm font-normal flex">
+                <button
+                  type="button"
+                  className="text-white flex bg-purple-600 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-normal rounded-lg text-sm px-3 py-2 text-center  mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                >
+                  Create NFT
+                  <svg
+                    className="w-4 h-3 mt-1 ml-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M9 5l7 7-7 7"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="mb-4 mt-3 border-b border-gray-200 dark:border-gray-700">
+        <ul
+          className="flex flex-wrap text-center -mb-px"
+          id="tabs"
+          data-tabs-toggle="#tabslist"
+          role="tablist"
+        >
+          <li className="mr-2" role="presentation">
+            <button
+              className="inline-block py-4 px-4 text-sm font-medium text-center text-gray-500 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 active"
+              id="transactions-tab"
+              data-tabs-target="#transactions"
+              type="button"
+              role="tab"
+              aria-controls="transactions"
+              aria-selected="false"
+            >
+              Transactions
+            </button>
+          </li>
+          <li className="mr-2 " role="presentation">
+            <button
+              className="inline-block py-4 px-4 text-sm font-medium text-center text-gray-500 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
+              id="collectibles-tab"
+              data-tabs-target="#collectibles"
+              type="button"
+              role="tab"
+              aria-controls="collectibles"
+              aria-selected="true"
+            >
+              Collectibles
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div id="tabslist">
+        <div
+          className="p-2 mb-4 bg-white rounded-lg border border-gray-100 dark:bg-gray-800 dark:border-gray-700"
+          id="collectibles"
+          role="tabpanel"
+          aria-labelledby="collectibles-tab"
+        >
+          <ol className="divide-y divider-gray-200 dark:divide-gray-700">
+            {collectables.map((item) => (
+              <CollectiableItem
+                name={item.name}
+                key={item.img}
+                creator={item.creator}
+                img={item.img}
+              />
+            ))}
+          </ol>
         </div>
       </div>
     </div>
