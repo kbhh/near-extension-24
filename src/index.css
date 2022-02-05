@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  text-align: center;
+}
+
+.Home-title {
+  color: #B072FF;
+}
+
+.app-main-header {
+  width: 100%;
+  height: 10%;
+  background: #F5F5F5;
+  border: 1px solid #DFDFE0;
+  box-sizing: border-box;
+  border-radius: 0px;
+}
+
+.form-status-indicators-active {
+position: static;
+padding: 5px;
+background: #FCFCFC;
+border: 1px solid #BEBEC2;
+border-radius: 10px;
+flex: none;
+
+}
+.form-status-indicators-container {
+  margin-top: 50px;
+  flex-direction: row;
+  flex: content;
+   justify-content: space-between;
+}
+.form-status-indicators {
+position: static;
+font-family: Manrope;
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 18px;
+letter-spacing: -0.154px;
+color: #6F6E73;
+margin-left: 7px;
+margin-right: 7px;
+
+}
+
