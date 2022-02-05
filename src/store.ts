@@ -5,10 +5,12 @@ interface UserState {
     email?: string
     phonenumber?: string
     isEmail?: boolean
+    accountid?: string
 }
 const intialUser: UserState = {
     email: '',
     phonenumber: '',
+    accountid: '',
     isEmail: true
 }
 const userSlice = createSlice({
@@ -27,8 +29,7 @@ const userSlice = createSlice({
         },
         setAccount: (state, action: PayloadAction<any>) => {
             async () => await apiRequest(action.payload);
-            state.phonenumber = action.payload
-            state.isEmail = false
+            state.accountid = action.payload
         }
     }
 })

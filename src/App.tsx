@@ -3,21 +3,17 @@ import Home from "./pages/auth/Home";
 import React from "react";
 import VerficationPage from "./pages/auth/Verification";
 import SetupAccount from "./pages/auth/SetupAccount";
+import Landing from "./pages/Landing";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <header className="app-main-header py-12">
-          <h3 className="text-align-center text-xl ">
-            <span className="home-title"> Home</span>
-            <span>Page</span>
-          </h3>
-        </header>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/verification" element={<VerficationPage />} />
           <Route path="/setup-account" element={<SetupAccount />} />
+          <Route path="/landing" element={<Landing />} />
         </Routes>
       </div>
     </BrowserRouter>
