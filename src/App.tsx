@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/auth/Home";
 import React from "react";
 import VerficationPage from "./pages/auth/Verification";
+import SetupAccount from "./pages/auth/SetupAccount";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/verification" element={<VerficationPage />} />
+          <Route path="/setup-account" element={<SetupAccount />} />
         </Routes>
       </div>
     </BrowserRouter>

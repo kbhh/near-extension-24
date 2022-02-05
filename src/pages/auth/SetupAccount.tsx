@@ -3,68 +3,36 @@ import React, { useState } from "react";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setPhone, setEmail } from "../../store";
+import { setAccount } from "../../store";
 
-const HomePage = () => {
-  const [isEmail, setIsEmail] = useState(true);
+const SetupAccount = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const phoneNumberRegx = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
-  const emailValidation = Yup.object({
+
+  const vSchema = Yup.object({
     email: Yup.string().email("Invalid email address").required("Required"),
+    accountid: Yup.string()
+      .matches(/^[A-Za-z ]*$/, "Please enter valid name")
+      .required("Required"),
   });
-  const phoneValidation = Yup.object({
-    phonenumber: Yup.string().matches(
-      phoneNumberRegx,
-      "Phone number is not valid"
-    ),
-  });
-  const [vSchema, setVSchmea] = useState<any>(emailValidation);
 
   const goToVerification = () => navigate("verification");
   const submitData = (value: any) => {
-    if (isEmail) {
-      dispatch(setEmail(value.email));
-    } else {
-      dispatch(setPhone(value.phonenumber));
-    }
     goToVerification();
-  };
-  const changeForm = (isEmail: boolean) => {
-    setIsEmail(isEmail);
-    if (isEmail) {
-      setVSchmea(emailValidation);
-    } else {
-      setVSchmea(phoneValidation);
-    }
   };
   return (
     <div className="min-h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="form-status-indicators-container">
-          <button
-            type="button"
-            onClick={() => changeForm(true)}
-            className={` ${
-              isEmail ? "border border-gray-400 text-gray-900" : "text-gray-500"
-            } focus:ring-4 focus:ring-gray-300 font-medium rounded-xl text-sm px-5 py-2 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800`}
-          >
-            Email
-          </button>
-          <button
-            onClick={() => changeForm(false)}
-            className={` ${
-              !isEmail
-                ? "border border-gray-400 text-gray-900"
-                : "text-gray-500"
-            } focus:ring-4 focus:ring-gray-300 font-medium rounded-xl text-sm px-5 py-2 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800`}
-          >
-            Phone
-          </button>
+          <p className="text-left text-gray-500">
+            Enter an Account ID to use with your NEAR account. Your Account ID
+            will be used for all NEAR operations, including sending and
+            receiving assets.
+          </p>
         </div>
         <Formik
           validateOnMount
-          initialValues={{ email: "", phonenumber: "" }}
+          initialValues={{ email: "", accountid: "" }}
           validationSchema={vSchema}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
@@ -74,53 +42,59 @@ const HomePage = () => {
         >
           {({ isValid, values, isSubmitting }) => (
             <Form>
-              {isEmail && (
-                <>
-                  <Field
-                    type="email"
-                    placeholder="johndoe@gmail.com"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    name="email"
-                  />
-                  <ErrorMessage
-                    className="mt-2 text-left text-sm text-red-600 dark:text-red-500"
-                    name="email"
-                    component="div"
-                  />
-                </>
-              )}
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-left ml-1 mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                >
+                  Your email
+                </label>
+                <Field
+                  type="email"
+                  id="email"
+                  placeholder="johndoe@gmail.com"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  name="email"
+                />
+                <ErrorMessage
+                  className="mt-2 text-left text-sm text-red-600 dark:text-red-500"
+                  name="email"
+                  component="div"
+                />
+              </div>
 
-              {!isEmail && (
-                <>
+              <div>
+                <label
+                  htmlFor="accountid"
+                  className="block text-left mt-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                >
+                  Account id
+                </label>
+                <div className="relative">
                   <Field
-                    type="tel"
-                    name="phonenumber"
-                    placeholder="Ex 337-378-8383"
-                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="text"
+                    name="accountid"
+                    id="accountid"
+                    placeholder="Your name"
+                    className="bg-gray-50 mt-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
+                  <div className="flex border-l-2 absolute inset-y-0 right-3 items-center pl-3 pointer-events-none">
+                    <span>.near</span>
+                  </div>
+                </div>
+                <div className="mt-1">
                   <ErrorMessage
-                    className="mt-2 text-left text-sm text-red-600 dark:text-red-500"
-                    name="phonenumber"
+                    className="mt-2  text-left text-sm text-red-600 dark:text-red-500"
+                    name="accountid"
                     component="div"
                   />
-                </>
-              )}
+                </div>
+              </div>
               <button
                 type="submit"
-                disabled={
-                  !isValid ||
-                  isSubmitting ||
-                  (!isEmail && !values["phonenumber"]) ||
-                  (isEmail && !values["email"])
-                }
+                disabled={!isValid || isSubmitting}
                 className={`text-white mt-12 ${
-                  !isSubmitting &&
-                  isValid &&
-                  ((!isEmail && values["phonenumber"]) ||
-                    (isEmail && values["email"]))
-                    ? "bg-indigo-500"
-                    : "bg-gray-400"
+                  !isSubmitting && isValid ? "bg-indigo-500" : "bg-gray-400"
                 }   font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-indigo-600 `}
               >
                 Continue
@@ -164,7 +138,7 @@ const HomePage = () => {
         </Formik>
         <div>
           <span className="text-gray-500">
-            By creating a NEAR account, you agree to the NEAR Wallet{" "}
+            by clicking continue you must agree to near labs
           </span>
           <span className="text-indigo-500">
             <a href="#"> Terms & Conditions </a>
@@ -174,7 +148,9 @@ const HomePage = () => {
             <a href="#"> Privacy Policy</a>
           </span>
         </div>
-        <hr className="mx-2 text-grey-500" />
+        <div>
+          <hr className="mx-2 text-grey-500" />
+        </div>
         <div>
           <div>
             <span className="text-grey-800">Already have NEAR account?</span>
@@ -207,4 +183,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default SetupAccount;
